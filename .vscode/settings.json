@@ -5,11 +5,15 @@
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
-    "clang-format.executable": "clang-format-16",
+    "clang-format.executable": "clang-format",
     "clang-tidy.executable": "clang-tidy-16",
     "clang-tidy.fixOnSave": true,
     "clang-tidy.lintOnSave": true,
     "clang-tidy.compilerArgs": [
         "--config-file=.clang-tidy"
     ],
+    "files.associations": {
+        "*.map": "xml",
+        "iostream": "cpp"
+    },
 }
