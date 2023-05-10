@@ -27,34 +27,6 @@ jobs:
           cd build
           cmake ..
           make
-          ctest
+          ctest 
           cd ../..
         done
-
-    - name: Build release
-      if: success()
-      run: |
-        for subproject in $(ls -d */); do
-          cd $subproject
-          mkdir release
-          cd release
-          cmake -DCMAKE_BUILD_TYPE=Release ..
-          make
-          cd ../..
-        done
-
-    - name: Create Release
-      if: success()
-      uses: actions/create-release@v1
-      with:
-        tag_name: v1.0.0
-        release_name: Release v1.0.0
-        body: |
-          This is the first release of the project.
-        draft: false
-        prerelease: false
-        files:
-          - name: "myapp"
-            path: "subproject1/release/myapp"
-          - name: "mylibrary"
-            path: "subproject2/release/mylibrary.so"
