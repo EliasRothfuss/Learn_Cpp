@@ -52,9 +52,6 @@ jobs:
           cd build
           cmake ..
           make
-          if [ -f "CTestTestfile.cmake" ]; then
-              ctest
-            else
-              echo "No CTestTestfile.cmake found in $subproject/build"
+          ctest 
           cd ../..
         done
