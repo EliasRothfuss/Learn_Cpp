@@ -1,4 +1,4 @@
-name: Run Google Tests and Create Release
+name: Run Google Tests on Commit
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libgtest-dev cmake
 
-    - name: Build and run tests
+    - name: Build subprojects
       run: |
         for subproject in $(ls -d */); do
           cd $subproject
@@ -27,6 +27,28 @@ jobs:
           cd build
           cmake ..
           make
-          ctest 
           cd ../..
+        done
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev cmake
+
+    - name: Test subprojects
+      run: |
+        for subproject in $(ls -d */); do
+          cd $subproject/build
+          ctest
+          cd ../../
         done
