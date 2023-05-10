@@ -43,19 +43,18 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libgtest-dev cmake
-
-    - name: Test subprojects
+    
+    - name: Build and run tests
       run: |
-        for subproject in */; do
-          if [ -d "$subproject/build" ]; then
-            cd $subproject/build
-            if [ -f "CTestTestfile.cmake" ]; then
+        for subproject in $(ls -d */); do
+          cd $subproject
+          mkdir build
+          cd build
+          cmake ..
+          make
+          if [ -f "CTestTestfile.cmake" ]; then
               ctest
             else
               echo "No CTestTestfile.cmake found in $subproject/build"
-            fi
-            cd ../../
-          else
-            echo "No build directory found in $subproject"
-          fi
+          cd ../..
         done
