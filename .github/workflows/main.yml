@@ -20,7 +20,7 @@ jobs:
 
     - name: Build subprojects
       run: |
-        for subproject in */; do
+        for subproject in $(ls -d */); do
           cd $subproject
           mkdir -p build
           cd build
