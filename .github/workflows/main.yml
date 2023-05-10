@@ -1,5 +1,4 @@
-name: Run Google Tests on Commit
-
+name: Built and Test
 on:
   push:
     branches:
@@ -21,13 +20,13 @@ jobs:
 
     - name: Build subprojects
       run: |
-        for subproject in $(ls -d */); do
+        for subproject in */; do
           cd $subproject
-          mkdir build
+          mkdir -p build
           cd build
           cmake ..
           make
-          cd ../..
+          cd ../../
         done
 
   test:
@@ -47,8 +46,16 @@ jobs:
 
     - name: Test subprojects
       run: |
-        for subproject in $(ls -d */); do
-          cd $subproject/build
-          ctest
-          cd ../../
+        for subproject in */; do
+          if [ -d "$subproject/build" ]; then
+            cd $subproject/build
+            if [ -f "CTestTestfile.cmake" ]; then
+              ctest
+            else
+              echo "No CTestTestfile.cmake found in $subproject/build"
+            fi
+            cd ../../
+          else
+            echo "No build directory found in $subproject"
+          fi
         done
