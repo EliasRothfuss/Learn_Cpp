@@ -1,8 +1,7 @@
 #!/bin/bash
 echo Project Name?
 read ProjectName
-echo Random_String?
-read Random_String
+
 
 mkdir $ProjectName
 cd $ProjectName
@@ -54,6 +53,7 @@ EOF
 mkdir include
 cd include
 
+Random_String=$(openssl rand -hex 12)
 cat << EOF > $ProjectName.h
 #ifndef ${ProjectName^^}_${Random_String^^}
 #define ${ProjectName^^}_${Random_String^^}
