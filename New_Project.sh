@@ -54,7 +54,7 @@ mkdir include
 cd include
 
 Random_String=$(openssl rand -hex 12)
-cat << EOF > $ProjectName.h
+cat << EOF > $ProjectName.hpp
 #ifndef ${ProjectName^^}_${Random_String^^}
 #define ${ProjectName^^}_${Random_String^^}
 
@@ -71,7 +71,7 @@ cd src
 cat << EOF > main.cpp
 #include <iostream>
 #include <stdint.h>
-#include "$ProjectName.h"
+#include "$ProjectName.hpp"
 
 auto main() -> int
 {
@@ -85,7 +85,7 @@ EOF
 cat << EOF > $ProjectName.cpp
 #include <iostream>
 #include <stdint.h>
-#include "$ProjectName.h"
+#include "$ProjectName.hpp"
 
 void say_hi()
 {
@@ -100,7 +100,7 @@ cd test
 
 cat << EOF > ${ProjectName}_test.cpp
 #include "gtest/gtest.h"  // include the gtest functions & macros
-#include "$ProjectName.h"
+#include "$ProjectName.hpp"
 
 EOF
 cd ..
