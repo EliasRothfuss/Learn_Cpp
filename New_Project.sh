@@ -55,8 +55,8 @@ cd include
 
 Random_String=$(openssl rand -hex 12)
 cat << EOF > $ProjectName.hpp
-#ifndef ${ProjectName^^}_${Random_String^^}
-#define ${ProjectName^^}_${Random_String^^}
+#ifndef ${ProjectName^^}_H_${Random_String^^}
+#define ${ProjectName^^}_H_${Random_String^^}
 
 void say_hi();
 
