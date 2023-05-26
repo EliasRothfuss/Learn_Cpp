@@ -3,7 +3,6 @@
 #include <stdint.h>
 
 #include <iostream>
-
 #include <string>
 
 Animal::Animal()
@@ -14,7 +13,13 @@ Animal::Animal()
 Cat::Cat(const std::string name_)
 {
     Cat::name = name_;
-    std::cout << "miau" << std::endl;
+    std::cout << Cat::name << std::endl;
+}
+
+
+void Cat::make_noise() const
+{
+    std::cout << "meow" << std::endl;
 }
 
 void Cat::operator+(const Cat &)
@@ -30,7 +35,7 @@ void Cat::operator+(const Bird &)
 Bird::Bird(const std::string name_)
 {
     Bird::name = name_;
-    std::cout << "tewpot" << std::endl;
+    std::cout << Bird::name << std::endl;
 }
 
 void Bird::operator+(const Cat &)
@@ -41,4 +46,9 @@ void Bird::operator+(const Cat &)
 void Bird::operator+(const Bird &)
 {
     std::cout << "Synphony" << std::endl;
+}
+
+void Bird::make_noise() const
+{
+    std::cout << "twitter" << std::endl;
 }
