@@ -5,7 +5,6 @@
 class Animal
 {
    public:
-    Animal();
     virtual void make_noise() const = 0;
 };
 
@@ -13,11 +12,7 @@ class Bird;
 
 class Cat : public Animal
 {
-   private:
-    std::string name;
-
    public:
-    Cat(const std::string name_);
     void operator+(const Cat &);
     void operator+(const Bird &);
     void make_noise() const override;
@@ -25,11 +20,7 @@ class Cat : public Animal
 
 class Bird : public Animal
 {
-   private:
-    std::string name;
-
    public:
-    Bird(const std::string name_);
     void operator+(const Cat &);
     void operator+(const Bird &);
     void make_noise() const override;

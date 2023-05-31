@@ -1,18 +1,30 @@
-#include <iostream>
 #include <stdint.h>
+
+#include <iostream>
+#include <memory>
+#include <vector>
+
 #include "polymorphism.hpp"
 
 auto main() -> int
 {
-    Cat Cat1("Obolus");
-    Bird Bird1("Marius");
-    
-    Cat1 + Bird1;
-    Bird1 + Cat1;
-    Bird1 + Bird1;
-    Cat1 + Cat1;
+    std::vector<std::shared_ptr<Animal>> animals;
 
-    Cat1.make_noise();
-    Bird1.make_noise();
+    for (int i = 0; i < 10; i++)
+    {
+        if (rand() % 2)
+        {
+            animals.push_back(std::make_shared<Cat>());
+        }
+        else
+        {
+            animals.push_back(std::make_shared<Bird>());
+        }
+    }
+
+    for (auto &itr : animals)
+    {
+        itr -> make_noise();
+    }
+
 }
-
