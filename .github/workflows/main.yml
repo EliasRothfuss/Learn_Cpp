@@ -17,6 +17,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libgtest-dev cmake
+        sudo apt-get install -y libopencv-dev
 
     - name: Build subprojects
       run: |
@@ -43,6 +44,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libgtest-dev cmake
+        sudo apt-get install -y libopencv-dev
     
     - name: Build and run tests
       run: |
